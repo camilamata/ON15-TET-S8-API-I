@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.json())
 // criando "rota de apresentação"
 app.get("/" , (request, response) => {
-    response.statusCode(200).json([
+    response.status(200).json([
         {
            "Mensagem": "buscar filmes e séries"
         }
@@ -41,16 +41,16 @@ app.get("/filmes/buscar/:id", (request, response) =>{
   })
   
 //rota de filme por nome
-app.get("/filmes/filtro", (request, response) => {
-    let tituloRequest = request.query.title.toLowerCase()
+app.get("/filmes/filtrarPorNome", (request, response) => {
+    let tituloRequest = request.query.title.toLowerCase() //esse title poderia ser t ou T, e é o que entra nos params do Postman
     let tituloEncontrado = filmesJson.filter(
         filme => filme.Title.toLowerCase().includes(tituloRequest)
-    )
+    ) //esse filme.Title. precisa ser com T para ficar igual o do data(banco de dados)
     response.status(200).send(tituloEncontrado)
 })
 
 //rota de serie por nome
-app.get("/serie/filtro", (request, response) => {
+app.get("/serie/filtrarPorNome", (request, response) => {
     let tituloRequest = request.query.title.toLowerCase()
     let tituloEncontrado = seriesJson.filter(
         serie => serie.Title.toLowerCase().includes(tituloRequest)
@@ -61,22 +61,22 @@ app.get("/serie/filtro", (request, response) => {
 app.post("/filmes/cadastro", (request, response) => {
     let bodyRequest = request.body
     let cadastroDeFilme = { //pedindo todas as infos que um filme precisa ter
-        id: (filmesJson.length)+1,
-        Title: bodyRequest.Title,
-        Year: bodyRequest.Year,
-        Rated: bodyRequest.Rated,
-        Released: bodyRequest.Eeleased,
-        Runtime: bodyRequest.Runtime,
-        Genre: bodyRequest.Genre,
-        Director: bodyRequest.Director,
-        Writer: bodyRequest.Writer,
-        Actors: bodyRequest.Actors,
-        Plot: bodyRequest.Plot,
-        Language: bodyRequest.Language,
-        Country: bodyRequest.Country,
-        Awards: bodyRequest.Awards
+        "id": (filmesJson.length)+1,
+        "Title": bodyRequest.Title,
+        "Year": bodyRequest.Year,
+        "Rated": bodyRequest.Rated,
+        "Released": bodyRequest.Eeleased,
+        "Runtime": bodyRequest.Runtime,
+        "Genre": bodyRequest.Genre,
+        "Director": bodyRequest.Director,
+        "Writer": bodyRequest.Writer,
+        "Actors": bodyRequest.Actors,
+        "Plot": bodyRequest.Plot,
+        "Language": bodyRequest.Language,
+        "Country": bodyRequest.Country,
+        "Awards": bodyRequest.Awards
     }
-    filmesJson.push(filmeCadastrado) //colocando o filme na lista oficial
+    filmesJson.push(cadastroDeFilme) //colocando o filme na lista oficial
     response.status(200).send({
         "Mensagem": "O filme foi cadastrado!", cadastroDeFilme
     })

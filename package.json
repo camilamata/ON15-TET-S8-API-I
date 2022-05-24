@@ -10,7 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "nodemon": "^2.0.16"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camilamata/ON15-TET-S8-API-I.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/camilamata/ON15-TET-S8-API-I/issues"
+  },
+  "homepage": "https://github.com/camilamata/ON15-TET-S8-API-I#readme"
 }
